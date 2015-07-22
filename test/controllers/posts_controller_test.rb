@@ -21,7 +21,7 @@ class PostsControllerTest < ActionController::TestCase
       post :create, post: { author_name: @post.author_name, body: @post.body, title: @post.title }
     end
 
-    assert_redirected_to post_path(assigns(:post))
+    assert_redirected_to "/"
   end
 
   test "should show post" do
@@ -36,7 +36,7 @@ class PostsControllerTest < ActionController::TestCase
 
   test "should update post" do
     patch :update, id: @post, post: { author_name: @post.author_name, body: @post.body, title: @post.title }
-    assert_redirected_to post_path(assigns(:post))
+    assert_redirected_to "/"
   end
 
   test "should destroy post" do
