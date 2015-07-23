@@ -7,8 +7,8 @@ class Event < ActiveRecord::Base
   store :data, accessors: [:changes], coder: JSON
 
   before_create :set_uuid
-  before_create "apply!"
-  before_create :publish
+  after_create "apply!"
+  after_create :publish
 
   def set_uuid
     self.uuid ||= SecureRandom.uuid
@@ -31,7 +31,7 @@ class Event < ActiveRecord::Base
   end
 
   def publish
-    Notifier.publish "events", self.to_json
+    Notifier.publish "events", self.to_json(root: false)
   end
 
   def self.replay!(start_id=nil)

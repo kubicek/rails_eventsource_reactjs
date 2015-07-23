@@ -1,0 +1,3 @@
+<h1>Recent events</h1>
+
+<%= react_component('EventTable', {events: Event.order(id: :desc).limit(5)}.to_json(root: false), {prerender: false}) %>
